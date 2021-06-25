@@ -16,13 +16,6 @@ router
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.json(coupons);
-  });
-
-/* Create a coupons */
-router
-  .route('/coupon')
-  .options(cors.corsWithOptions, (req, res) => {
-    res.sendStatus(200);
   })
   .post(cors.corsWithOptions, async function (req, res, next) {
     /* const couponsParams = {
@@ -41,10 +34,17 @@ router
       res.setHeader('Content-Type', 'application/json');
       res.json(error.message);
     }
+  });
+
+/* Create a coupons */
+router
+  .route('/:couponId')
+  .options(cors.corsWithOptions, (req, res) => {
+    res.sendStatus(200);
   })
   .delete(cors.corsWithOptions, async function (req, res, next) {
     try {
-      const coupon = await stripe.coupons.del(req.body.id);
+      const coupon = await stripe.coupons.del(req.params.couponId);
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.json(coupon);

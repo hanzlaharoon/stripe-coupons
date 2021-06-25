@@ -60,12 +60,8 @@ const AddCoupon = ({ fectchCoupons }) => {
         percent_off: percentOff,
         duration,
       };
-      console.log(
-        '🚀 ~ file: AddCoupon.js ~ line 63 ~ handleSubmit ~ couponObj',
-        couponObj
-      );
       axios
-        .post(baseUrl + 'coupons/addcoupon/', couponObj)
+        .post(baseUrl + 'coupons/', couponObj)
         .then((res) => {
           console.log('/coupons/add', res);
           if (res.data) {
