@@ -10,6 +10,18 @@ const Home = () => {
 
   // Populate Data
   useEffect(() => {
+    fectchCoupons();
+
+    // axios
+    //   .post(baseUrl + 'coupons/addcoupon/')
+    //   .then((res) => {
+    //     console.log('/coupons/addcoupon', res);
+    //     setcouponList(res.data.data);
+    //   })
+    //   .catch((err) => console.log(err));
+  }, []);
+
+  function fectchCoupons() {
     axios
       .get(baseUrl + 'coupons/')
       .then((res) => {
@@ -17,7 +29,7 @@ const Home = () => {
         setcouponList(res.data.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }
 
   function toggleFavoritePlace(value, id) {
     // axios
@@ -32,7 +44,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar fectchCoupons={fectchCoupons} />
 
       <Box padding={1} margin={1}>
         <Typography variant='h4'>Coupons</Typography>

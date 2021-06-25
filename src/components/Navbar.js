@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { Box, Button } from '@material-ui/core';
+import AddCoupon from './AddCoupon';
 // import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar({ welcome = false }) {
+export default function Navbar({ welcome = false, fectchCoupons }) {
   const classes = useStyles();
   //   const history = useHistory();
 
@@ -73,7 +74,8 @@ export default function Navbar({ welcome = false }) {
           {!welcome && (
             <>
               <Box margin={1}>
-                <Button variant='contained'>Add new Coupon</Button>
+                {/* <Button variant='contained'>Add new Coupon</Button> */}
+                <AddCoupon fectchCoupons={fectchCoupons} />
               </Box>
               <Button
                 color='secondary'
