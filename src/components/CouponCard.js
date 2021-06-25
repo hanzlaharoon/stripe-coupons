@@ -3,8 +3,9 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { IconButton, makeStyles } from '@material-ui/core';
+import { Grid, IconButton, makeStyles } from '@material-ui/core';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
   root: {
@@ -33,7 +34,7 @@ const CouponCard = ({
       <Card>
         <CardContent>
           <Typography variant='h5' component='h2'>
-            {name}
+            {name || id}
           </Typography>
           <Typography className={classes.pos} color='textSecondary'>
             {`${percent_off} percent off`}
@@ -43,12 +44,17 @@ const CouponCard = ({
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton
-            aria-label='add to favorites'
-            onClick={() => handleClickFav(isFav, id)}
-          >
-            {/* <FavoriteIcon color={isFav ? 'secondary' : 'disabled'} /> */}
-          </IconButton>
+          <Grid container justify='flex-end'>
+            <Grid item>
+              <IconButton
+                aria-label='add to favorites'
+                onClick={() => handleClickFav(isFav, id)}
+              >
+                {/* <FavoriteIcon color={isFav ? 'secondary' : 'disabled'} /> */}
+                <DeleteIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
         </CardActions>
       </Card>
     </>
