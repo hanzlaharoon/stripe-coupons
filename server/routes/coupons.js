@@ -20,7 +20,7 @@ router
 
 /* Create a coupons */
 router
-  .route('/addcoupon')
+  .route('/coupon')
   .options(cors.corsWithOptions, (req, res) => {
     res.sendStatus(200);
   })
@@ -40,7 +40,19 @@ router
       res.statusCode = 400;
       res.setHeader('Content-Type', 'application/json');
       res.json(error.message);
-      next(error);
+    }
+  })
+  .delete(cors.corsWithOptions, async function (req, res, next) {
+    try {
+      const coupon = await stripe.coupons.del(req.body.id);
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'application/json');
+      res.json(coupon);
+    } catch (error) {
+      res.statusCode = 400;
+      //   res.setHeader('Content-Type', 'application/json');
+      // res.json(error.message);
+      res.end(error.message);
     }
   });
 
