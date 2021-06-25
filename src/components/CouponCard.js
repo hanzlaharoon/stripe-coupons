@@ -4,8 +4,9 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Grid, IconButton, makeStyles } from '@material-ui/core';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
+import axios from 'axios';
+import { baseUrl } from '../shared/baseUrl';
 
 const useStyles = makeStyles({
   root: {
@@ -21,10 +22,23 @@ const useStyles = makeStyles({
 
 const CouponCard = ({
   coupon: { id, name, percent_off, duration, favorite },
+  fectchCoupons,
   toggleFavorite,
 }) => {
   const classes = useStyles();
   const [isFav, setIsFav] = useState(favorite);
+
+  const handleDelete = (id) => {
+    console.log('id : ', id);
+    axios
+      .delete(baseUrl + `coupons/${id}`)
+      .then((res) => {
+        console.log('coupon/delete ', res);
+        fectchCoupons();
+      })
+      .catch((err) => console.log(err));
+  };
+
   const handleClickFav = (isFav, id) => {
     // toggleFavorite(!isFav, id);
     // setIsFav(!isFav);
@@ -37,7 +51,7 @@ const CouponCard = ({
             {name || id}
           </Typography>
           <Typography className={classes.pos} color='textSecondary'>
-            {`${percent_off} percent off`}
+            {`${percent_off}% OFF`}
           </Typography>
           <Typography variant='body2' component='p'>
             {`Duration: ${duration}`}
@@ -48,9 +62,8 @@ const CouponCard = ({
             <Grid item>
               <IconButton
                 aria-label='add to favorites'
-                onClick={() => handleClickFav(isFav, id)}
+                onClick={() => handleDelete(id)}
               >
-                {/* <FavoriteIcon color={isFav ? 'secondary' : 'disabled'} /> */}
                 <DeleteIcon />
               </IconButton>
             </Grid>
