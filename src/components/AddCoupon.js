@@ -40,6 +40,7 @@ const AddCoupon = ({ fectchCoupons }) => {
   };
 
   const handleClose = () => {
+    resetForm();
     setOpen(false);
   };
 
@@ -83,7 +84,7 @@ const AddCoupon = ({ fectchCoupons }) => {
   const resetForm = () => {
     setName('');
     setPercentOff('');
-    setDuration('');
+    setDuration('once');
   };
 
   return (
