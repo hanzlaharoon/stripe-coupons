@@ -4,10 +4,27 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
+const mongoose = require('mongoose');
+const config = require('./config');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var couponsRouter = require('./routes/coupons');
+
+const url = config.mongoUrl;
+const connect = mongoose.connect(url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+connect.then(
+  (db) => {
+    console.log('Connected correctly to server');
+  },
+  (err) => {
+    console.log(err);
+  }
+);
 
 var app = express();
 
