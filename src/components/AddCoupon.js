@@ -32,6 +32,7 @@ const AddCoupon = ({ fectchCoupons }) => {
   const [name, setName] = React.useState();
   const [percentOff, setPercentOff] = useState();
   const [duration, setDuration] = useState('once');
+  const [months, setMonths] = useState();
   const [open, setOpen] = React.useState(false);
   //   const history = useHistory();
 
@@ -53,6 +54,9 @@ const AddCoupon = ({ fectchCoupons }) => {
   const handleChangeDuration = (event) => {
     setDuration(event.target.value);
   };
+  const handleChangeMonths = (event) => {
+    setMonths(event.target.value);
+  };
 
   const handleSubmit = () => {
     if (name && percentOff && duration) {
@@ -60,6 +64,7 @@ const AddCoupon = ({ fectchCoupons }) => {
         name: name.trim(),
         percent_off: percentOff,
         duration,
+        duration_in_months: months,
       };
       const token = localStorage.getItem('token');
       axios
@@ -121,7 +126,7 @@ const AddCoupon = ({ fectchCoupons }) => {
               <TextField
                 label='Percent Off'
                 value={percentOff}
-                // fullWidth
+                fullWidth
                 type
                 margin='dense'
                 variant='outlined'
@@ -151,11 +156,11 @@ const AddCoupon = ({ fectchCoupons }) => {
                   <Grid item sm={6}>
                     <TextField
                       //   label='No. of Months'
-                      //   value={1}
+                        value={months}
                       className={classes.textField}
                       variant='outlined'
                       margin='dense'
-                      onChange={handleChangeDuration}
+                      onChange={handleChangeMonths}
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position='end'>Months</InputAdornment>
@@ -179,43 +184,6 @@ const AddCoupon = ({ fectchCoupons }) => {
         </DialogActions>
       </Dialog>
 
-      {/* <Container maxWidth={'sm'}>
-        <form>
-          <TextField
-            label='Name'
-            fullWidth
-            value={name}
-            margin='dense'
-            onChange={handleChangeName}
-          />
-          <TextField
-            label='percentOff'
-            value={percentOff}
-            fullWidth
-            margin='dense'
-            onChange={handleChangePercentOff}
-          />
-          <TextField
-            label='Duration'
-            value={duration}
-            // multiline
-            // rowsMax={4}
-            fullWidth
-            margin='dense'
-            onChange={handleChangeDuration}
-          />
-
-          <Box margin={1} padding={1}>
-            <Grid container justify='flex-end'>
-              <Grid item>
-                <Button variant='outlined' onSubmit={() => handleSubmit}>
-                  Submit
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
-        </form>
-      </Container> */}
     </>
   );
 };

@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 const CouponCard = ({
-  coupon: { id, name, percent_off, duration },
+  coupon: { id, name, percent_off, duration, duration_in_months },
   fectchCoupons,
 }) => {
   const classes = useStyles();
@@ -47,9 +47,12 @@ const CouponCard = ({
           <Typography className={classes.pos} color='textSecondary'>
             {`${percent_off}% OFF`}
           </Typography>
-          <Typography variant='body2' component='p'>
+          {duration !== 'repeating' && <Typography variant='body2' component='p'>
             {`Duration: ${duration}`}
-          </Typography>
+          </Typography>}
+          {duration === 'repeating' && <Typography variant='body2' component='p'>
+            {`Duration: ${duration} - ${duration_in_months} Months`}
+          </Typography>}
         </CardContent>
         <CardActions>
           <Grid container justify='flex-end'>
