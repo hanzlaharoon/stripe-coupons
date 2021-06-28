@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { Box, Button } from '@material-ui/core';
 import AddCoupon from './AddCoupon';
-// import { useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,9 +59,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar({ welcome = false, fectchCoupons }) {
+export default function Navbar({ welcome = true, fectchCoupons }) {
   const classes = useStyles();
-  //   const history = useHistory();
+    const history = useHistory();
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('creds');
@@ -86,7 +86,7 @@ export default function Navbar({ welcome = false, fectchCoupons }) {
                 variant='outlined'
                 onClick={() => {
                       handleLogout();
-                  //   history.push('/login')
+                      history.push('/login')
                 }}
               >
                 Logout

@@ -32,7 +32,7 @@ const Home = () => {
 
   return (
     <>
-      <Navbar fectchCoupons={fectchCoupons} />
+      <Navbar welcome={false} fectchCoupons={fectchCoupons} />
 
       <Box padding={1} margin={1}>
         <Typography variant='h4'>Coupons</Typography>

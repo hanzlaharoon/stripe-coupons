@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import axios from 'axios';
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import { baseUrl } from '../shared/baseUrl';
 import Navbar from './Navbar';
 
@@ -18,7 +18,7 @@ const Login = ({ loginProp = false }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [confirmPass, setConfirmPass] = useState();
-  //   const history = useHistory();
+    const history = useHistory();
   const handleLogin = () => {
     if (!username || !password) {
       console.log("Validation failed");
@@ -37,7 +37,7 @@ const Login = ({ loginProp = false }) => {
           resetForm();
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('creds', JSON.stringify(userObj));
-          //   history.push('/places');
+            history.push('/coupons');
         } else {
           console.log('Login Failed');
         }
@@ -58,7 +58,7 @@ const Login = ({ loginProp = false }) => {
           console.log('/signup', res);
           if (res.data) {
             console.log('Register Successful');
-            resetForm();
+            // resetForm();
             setLogin(true)
             // history.push('/places');
           } else {
