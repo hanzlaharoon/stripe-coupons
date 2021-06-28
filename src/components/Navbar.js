@@ -62,6 +62,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar({ welcome = false, fectchCoupons }) {
   const classes = useStyles();
   //   const history = useHistory();
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('creds');
+  }
 
   return (
     <div className={classes.root}>
@@ -81,6 +85,7 @@ export default function Navbar({ welcome = false, fectchCoupons }) {
                 color='secondary'
                 variant='outlined'
                 onClick={() => {
+                      handleLogout();
                   //   history.push('/login')
                 }}
               >

@@ -16,8 +16,9 @@ const Home = () => {
 
   function fectchCoupons() {
     setLoading(true);
+    const token = localStorage.getItem('token');
     axios
-      .get(baseUrl + 'coupons/')
+      .get(baseUrl + 'coupons/', { headers: {"Authorization" : `bearer ${token}`} })
       .then((res) => {
         console.log('/coupons', res);
         setcouponList(res.data.data);
@@ -27,17 +28,6 @@ const Home = () => {
         console.log(err);
         setLoading(false);
       });
-  }
-
-  function toggleFavoritePlace(value, id) {
-    // axios
-    //   .put(baseUrl + `places/place/${id}/`, {
-    //     favorite: value,
-    //   })
-    //   .then((res) => {
-    //     console.log(`places/place/${id}/`, res);
-    //   })
-    //   .catch((err) => console.log(err));
   }
 
   return (
@@ -62,7 +52,6 @@ const Home = () => {
                   // key={coupon.id}
                   coupon={coupon}
                   fectchCoupons={fectchCoupons}
-                  toggleFavorite={toggleFavoritePlace}
                 />
               </Grid>
             ))}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -21,17 +21,15 @@ const useStyles = makeStyles({
 });
 
 const CouponCard = ({
-  coupon: { id, name, percent_off, duration, favorite },
+  coupon: { id, name, percent_off, duration },
   fectchCoupons,
-  toggleFavorite,
 }) => {
   const classes = useStyles();
-  const [isFav, setIsFav] = useState(favorite);
 
   const handleDelete = (id) => {
-    console.log('id : ', id);
+    const token = localStorage.getItem('token');
     axios
-      .delete(baseUrl + `coupons/${id}`)
+      .delete(baseUrl + `coupons/${id}`, { headers: {"Authorization" : `Bearer ${token}`} })
       .then((res) => {
         console.log('coupon/delete ', res);
         fectchCoupons();
@@ -39,10 +37,6 @@ const CouponCard = ({
       .catch((err) => console.log(err));
   };
 
-  const handleClickFav = (isFav, id) => {
-    // toggleFavorite(!isFav, id);
-    // setIsFav(!isFav);
-  };
   return (
     <>
       <Card>

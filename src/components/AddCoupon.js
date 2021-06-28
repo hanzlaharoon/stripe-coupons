@@ -61,8 +61,9 @@ const AddCoupon = ({ fectchCoupons }) => {
         percent_off: percentOff,
         duration,
       };
+      const token = localStorage.getItem('token');
       axios
-        .post(baseUrl + 'coupons/', couponObj)
+        .post(baseUrl + 'coupons/', couponObj, { headers: {"Authorization" : `Bearer ${token}`} })
         .then((res) => {
           console.log('/coupons/add', res);
           if (res.data) {
