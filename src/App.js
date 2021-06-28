@@ -2,7 +2,7 @@
 // import './App.css';
 
 import Home from './components/Home';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
 import AddCoupon from './components/AddCoupon';
 
